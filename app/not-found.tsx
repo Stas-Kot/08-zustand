@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     url: `${baseUrl.origin}/not-found`,
     images: [
       {
-        url: '../public/istockphoto-1404059706-612x612.jpg',
+        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
         width: 1200,
         height: 630,
         alt: '404 — Page Not Found',

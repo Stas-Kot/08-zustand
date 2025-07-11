@@ -4,12 +4,13 @@ import css from './NotesPage.module.css';
 import NotesClient from './Notes.client';
 import { fetchNotes, GetNotesRes } from '@/lib/api';
 import { Tag, TAGS} from '@/types/note';
+import { Metadata } from 'next';
 
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props):Promise<Metadata> {
   const { slug } = await params;
   return {
     title: `Notes: ${slug}`,

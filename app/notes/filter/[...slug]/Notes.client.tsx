@@ -18,7 +18,6 @@ interface NotesClientProps {
 }
 
 const NotesClient = ({ initialData, initialSearch, initialPage, initialTag: tag }: NotesClientProps) => {
-  // const [tag] = useState(initialTag);
   const [search, setSearch] = useState(initialSearch);
   const [page, setPage] = useState(initialPage);
   const [debouncedSearch] = useDebounce(search, 300);
@@ -28,7 +27,6 @@ const NotesClient = ({ initialData, initialSearch, initialPage, initialTag: tag 
     queryFn: () => fetchNotes(debouncedSearch, page, tag),
     initialData,
     placeholderData: keepPreviousData,
-    // refetchOnMount: false,
   });
 
   const totalPages = data?.totalPages || 0;
@@ -52,11 +50,6 @@ const NotesClient = ({ initialData, initialSearch, initialPage, initialTag: tag 
         </Link>
       </header>
       {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes} />}
-      {/* {isOpen && (
-        <Modal onClose={closeModal}>
-          <NoteForm onClose={closeModal} />
-        </Modal>
-      )} */}
     </>
   );
 };
