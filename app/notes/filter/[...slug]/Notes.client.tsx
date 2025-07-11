@@ -8,8 +8,6 @@ import { useDebounce } from 'use-debounce';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { fetchNotes, GetNotesRes } from '@/lib/api';
 import { Tag } from '@/types/note';
-import Modal from '@/components/Modal/Modal';
-import NoteForm from '@/components/NoteForm/NoteForm';
 import Link from 'next/link';
 
 interface NotesClientProps {
