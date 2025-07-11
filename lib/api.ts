@@ -46,8 +46,8 @@ const deleteNote = async (noteId: number): Promise<Note> => {
   return response.data;
 };
 
-const createNote = async (newNote: NewNote): Promise<Note> => {
-  const response = await axios.post<Note>('/notes', newNote, {
+const createNote = async (data: NewNote): Promise<Note> => {
+  const response = await axios.post<Note>('/notes', data, {
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
     },

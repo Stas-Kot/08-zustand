@@ -1,5 +1,26 @@
 import Link from 'next/link';
 import css from './Home.module.css'
+import { Metadata } from 'next';
+
+const baseUrl = new URL('https://08-zustand-vert.vercel.app');
+
+export const metadata: Metadata = {
+  title: 'Page Not Found | Notes App',
+  description: 'Sorry, this page does not exist on Notes App.',
+  openGraph: {
+    title: 'Page Not Found | Example App',
+    description: 'Sorry, this page does not exist on Notes App.',
+    url: `${baseUrl.origin}/not-found`,
+    images: [
+      {
+        url: '../public/istockphoto-1404059706-612x612.jpg',
+        width: 1200,
+        height: 630,
+        alt: '404 — Page Not Found',
+      },
+    ],
+  },
+};
 
 const NotFound = () => {
   return (

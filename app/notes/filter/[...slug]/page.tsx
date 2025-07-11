@@ -9,6 +9,27 @@ type Props = {
   params: Promise<{ slug: string[] }>;
 };
 
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  return {
+    title: `Notes: ${slug}`,
+    description: `Notes filtred by tag: ${slug}`,
+    openGraph: {
+      title: `Notes: ${slug}`,
+      description: `Notes filtred by tag: ${slug}`,
+      url: 'https://08-zustand-vert.vercel.app',
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'NoteHub logo',
+        },
+      ],
+    },
+  };
+}
+
 async function Notes({ params }: Props) {
   const queryClient = new QueryClient();
 
@@ -17,7 +38,9 @@ async function Notes({ params }: Props) {
 
   if (Array.isArray(slug) && slug.length > 0) {
     const stringTag = slug[0];
-    if (TAGS.includes(stringTag as Tag)) {
+    if (stringTag === 'All') {
+      currentTag = undefined; // означает: показываем все заметки
+    } else if (TAGS.includes(stringTag as Tag)) {
       currentTag = stringTag as Tag;
     } else {
       console.warn(`Invalid tag provided in slug: ${stringTag}`);

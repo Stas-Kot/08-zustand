@@ -10,6 +10,7 @@ import { fetchNotes, GetNotesRes } from '@/lib/api';
 import { Tag } from '@/types/note';
 import Modal from '@/components/Modal/Modal';
 import NoteForm from '@/components/NoteForm/NoteForm';
+import Link from 'next/link';
 
 interface NotesClientProps {
   initialData: GetNotesRes;
@@ -22,7 +23,6 @@ const NotesClient = ({ initialData, initialSearch, initialPage, initialTag: tag 
   // const [tag] = useState(initialTag);
   const [search, setSearch] = useState(initialSearch);
   const [page, setPage] = useState(initialPage);
-  const [isOpen, setIsOpen] = useState(false);
   const [debouncedSearch] = useDebounce(search, 300);
 
   const { data, isSuccess } = useQuery({
@@ -30,11 +30,8 @@ const NotesClient = ({ initialData, initialSearch, initialPage, initialTag: tag 
     queryFn: () => fetchNotes(debouncedSearch, page, tag),
     initialData,
     placeholderData: keepPreviousData,
-    refetchOnMount: false,
+    // refetchOnMount: false,
   });
-
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
 
   const totalPages = data?.totalPages || 0;
   const handleSearch = (value: string) => {
@@ -52,16 +49,16 @@ const NotesClient = ({ initialData, initialSearch, initialPage, initialTag: tag 
         {isSuccess && data?.totalPages > 1 && (
           <Pagination totalPages={totalPages} onPageChange={handlePageChange} page={page} />
         )}
-        <button className={css.button} onClick={openModal}>
+        <Link href="/notes/action/create" className={css.button}>
           Create note +
-        </button>
+        </Link>
       </header>
       {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes} />}
-      {isOpen && (
+      {/* {isOpen && (
         <Modal onClose={closeModal}>
           <NoteForm onClose={closeModal} />
         </Modal>
-      )}
+      )} */}
     </>
   );
 };
